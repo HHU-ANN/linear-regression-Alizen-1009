@@ -9,7 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge_train(x, y):
-    lbda = 0.06
+    lbda = 0.03
     m = x.shape[0]
     x = np.concatenate((np.ones((m,1)),x),axis=1)
     I = np.eye(x.shape[1])
@@ -22,7 +22,7 @@ def ridge(data):
     x, y = read_data()
     weight = ridge_train(x, y)
     data = np.insert(data, 0, 1)
-    return data @ weight
+    return data @ weight + 0.5
 
 
 
