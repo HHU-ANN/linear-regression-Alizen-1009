@@ -1,6 +1,5 @@
 import numpy as np
-x = np.zeros((6,6))
-m = x.shape[0]
-x = np.concatenate((np.ones((m,1)),x),axis=1)
-print(x)
-print(x.shape)
+x = np.zeros(6)
+#x = np.concatenate((np.ones((m,1)),x),axis=1)
+_x = np.insert(x, 0, 1)
+print(_x)
