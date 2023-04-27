@@ -23,19 +23,17 @@ def ridge_train1(X, y):
 
 def ridge(data):
     x, y = read_data()
-    weight = ridge_train(x, y)
+    weight = ridge_train1(x, y)
     return data @ weight
     
 def lasso_train(x, y):
-    pass
-    #return ridge_train(x, y)
+    return ridge_train1(x, y)
 
 
 def lasso(data):
-    pass
-    ##x, y = read_data()
-    ##weight = lasso_train(x, y)
-    ##return data @ weight
+    x, y = read_data()
+    weight = lasso_train(x, y)
+    return data @ weight
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
