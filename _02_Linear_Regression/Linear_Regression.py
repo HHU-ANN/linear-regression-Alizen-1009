@@ -36,7 +36,7 @@ def lasso_train(x, y):
     #y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
     yMat =np.mat(y.reshape(-1,1))
     #循环epochs次
-    Lambda = 30
+    Lambda = 0.1
     a = 0.01
     for i in range(10000):
         gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
