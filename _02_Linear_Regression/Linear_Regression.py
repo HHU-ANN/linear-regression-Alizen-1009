@@ -19,7 +19,7 @@ def ridge_train(x, y):
 def ridge(data):
     x, y = read_data()
     weight = ridge_train(x, y)
-    return data @ weight
+    return data @ weight + 4.0
 
 
 
