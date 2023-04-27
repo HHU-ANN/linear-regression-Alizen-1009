@@ -23,7 +23,7 @@ def ridge_train1(X, y):
 
 def ridge(data):
     x, y = read_data()
-    weight = ridge_train1(x, y)
+    weight = ridge_train(x, y)
     return data @ weight
     
 def lasso_train(x, y):
