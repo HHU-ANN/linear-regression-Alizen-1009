@@ -24,19 +24,14 @@ def ridge(data):
 
 
 def lasso_train(x, y):
-    m=x.shape[0]
+    m = x.shape[0]
     n = x.shape[1]
-    #初始化W的值,要变成矩阵形式
-    W=np.mat(np.ones((n,1)))
-    #X转为矩阵形式
-    xMat = np.mat(x)
-    #y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
-    yMat =np.mat(y.reshape(-1,1))
-    #循环epochs次
+    W=np.ones((n,1))
+    y.reshape(-1,1)
     Lambda = 0.1
     a = 0.01
     for i in range(10000):
-        gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
+        gradient = np.dot(x.T,(np.dot(x, W) -y)/m )+ Lambda * np.sign(W)
         W=W-a* gradient
     return W
 
