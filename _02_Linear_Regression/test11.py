@@ -1,6 +1,6 @@
-from Linear_Regression import lasso
 import numpy as np
-
-x = lasso(np.load('../data/exp02/X_train.npy'))
-
+x = np.zeros((6,6))
+m = x.shape[0]
+x = np.concatenate((np.ones((m,1)),x),axis=1)
 print(x)
+print(x.shape)
