@@ -17,7 +17,7 @@ def ridge_train(x, y):
     return ans
 
 def ridge_train1(X, y):
-    lambdas = 0.01
+    lambdas = 0.02
     ans = np.linalg.inv(X.T.dot(X) + lambdas * np.eye(X.shape[1])).dot(X.T).dot(y)
     return ans
 
@@ -30,11 +30,7 @@ def lasso_train(x, y):
     return ridge_train1(x, y)
 
 
-
-
-
 def lasso(data):
-    pass
     x, y = read_data()
     weight = lasso_train(x, y)
     return data @ weight
