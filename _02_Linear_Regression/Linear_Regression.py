@@ -9,7 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge_train(x, y):
-    lbda = -1
+    lbda = 0.001
     I = np.eye(x.shape[1])
     res = np.dot(x.T,x) + lbda * I
     res_inv = np.linalg.inv(res)
@@ -26,9 +26,9 @@ def ridge(data):
 def lasso_train(x, y):
     m, n = x.shape
     lbda = 0.1
-    theta = np.zeros((n, 1)) 
+    theta = np.zeros(n) 
     for i in range(100000):
-        #theta -= lbda * np.sign(theta) + np.dot(x.T, np.dot(x, theta) - y) / m
+        theta -= lbda * np.sign(theta) + np.dot(x.T, np.dot(x, theta) - y) / m
         theta[np.abs(theta) < lbda] = 0
     return theta 
 
