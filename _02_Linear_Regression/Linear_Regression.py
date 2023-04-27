@@ -21,8 +21,7 @@ def ridge_train(x, y):
 def ridge(data):
     x, y = read_data()
     weight = ridge_train(x, y)
-    m = data.shape[0]
-    data = np.concatenate((np.ones((m,1)),data),axis=1)
+    np.expand_dims(data,0).repeat(1,axis=0)
     return data @ weight
 
 
