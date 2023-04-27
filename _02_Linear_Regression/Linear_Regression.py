@@ -36,7 +36,7 @@ def lasso_train(x, y):
 
 def lasso(data):
     x, y = read_data()
-    weight = ridge_train(x, y)
+    weight = lasso_train(x, y)
     return data @ weight
 
 def read_data(path='./data/exp02/'):
