@@ -11,7 +11,7 @@ except ImportError as e:
 def ridge_train(x, y):
     lbda = 0.1
     I = np.eye(x.shape[1])
-    res1 = (np.dot(x.T,x) + lbda * I)
+    res1 = np.dot(x.T,x) + lbda * I
     res2 = np.linalg.inv(res1)
     ans = np.dot(res2, np.dot(x.T, y))
     return ans
@@ -26,14 +26,6 @@ def ridge(data):
     weight = ridge_train1(x, y)
     return data @ weight
     
-def lasso_train(x, y):
-    return ridge_train1(x, y)
-
-
-def lasso(data):
-    x, y = read_data()
-    weight = lasso_train(x, y)
-    return data @ weight
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
