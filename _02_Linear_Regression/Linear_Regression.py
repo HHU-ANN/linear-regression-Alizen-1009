@@ -16,23 +16,21 @@ def ridge_train(x, y):
     ans = np.dot(res_inv, np.dot(x.T, y))
     return ans
 
-
 def ridge(data):
     x, y = read_data()
     weight = ridge_train(x, y)
     return data @ weight
-    
+
+
+
 def lasso_train(x, y):
     m, n = x.shape
     lbda = 0.1
     theta = np.zeros((n, 1)) 
     for i in range(100000):
-        theta -= lbda * np.sign(theta) + np.dot(x.T, np.dot(x, theta) - y) / m
+        #theta -= lbda * np.sign(theta) + np.dot(x.T, np.dot(x, theta) - y) / m
         theta[np.abs(theta) < lbda] = 0
-    return theta
-
-    
-
+    return theta 
 
 def lasso(data):
     x, y = read_data()
