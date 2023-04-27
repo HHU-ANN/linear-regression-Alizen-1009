@@ -26,13 +26,12 @@ def ridge(data):
 def lasso_train(x, y):
     m=x.shape[0]
     #给x添加偏置项
-    X = np.concatenate((np.ones((m,1)),x),axis=1)
     #计算总特征数
-    n = X.shape[1]
+    n = x.shape[1]
     #初始化W的值,要变成矩阵形式
     W=np.mat(np.ones((n,1)))
     #X转为矩阵形式
-    xMat = np.mat(X)
+    xMat = np.mat(x)
     #y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
     yMat =np.mat(y.reshape(-1,1))
     #循环epochs次
@@ -48,7 +47,7 @@ def lasso(data):
     weight = lasso_train(x, y)
     return data @ weight
 
-def read_data(path='./data/exp02/'):
+def read_data(path='../data/exp02/'):
     x = np.load(path + 'X_train.npy')
     y = np.load(path + 'y_train.npy')
     return x, y

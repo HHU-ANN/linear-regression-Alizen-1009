@@ -1,4 +1,6 @@
+from Linear_Regression import lasso
 import numpy as np
-n = 6
-theta = np.zeros(n) 
-print(theta)
+
+x = lasso(np.load('../data/exp02/X_train.npy'))
+
+print(x)
