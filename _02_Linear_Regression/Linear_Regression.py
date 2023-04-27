@@ -9,7 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge_train(x, y):
-    lbda = 1e-6
+    lbda = 30
     I = np.eye(x.shape[1])
     res = np.dot(x.T,x) + lbda * I
     res_inv = np.linalg.inv(res)
@@ -19,18 +19,29 @@ def ridge_train(x, y):
 def ridge(data):
     x, y = read_data()
     weight = ridge_train(x, y)
-    return data @ weight + 4.0
+    return data @ weight
 
 
 
 def lasso_train(x, y):
-    m, n = x.shape
-    lbda = 0.1
-    theta = np.zeros((n, 1)) 
-    for i in range(100000):
-        theta -= lbda * np.sign(theta) + np.dot(x.T, np.dot(x, theta) - y) / m
-        theta[np.abs(theta) < lbda] = 0
-    return theta 
+    m=x.shape[0]
+    #给x添加偏置项
+    X = np.concatenate((np.ones((m,1)),x),axis=1)
+    #计算总特征数
+    n = X.shape[1]
+    #初始化W的值,要变成矩阵形式
+    W=np.mat(np.ones((n,1)))
+    #X转为矩阵形式
+    xMat = np.mat(X)
+    #y转为矩阵形式，这步非常重要,且要是m x 1的维度格式
+    yMat =np.mat(y.reshape(-1,1))
+    #循环epochs次
+    Lambda = 30
+    a = 0.01
+    for i in range(10000):
+        gradient = xMat.T*(xMat*W-yMat)/m + Lambda * np.sign(W)
+        W=W-a* gradient
+    return W
 
 def lasso(data):
     x, y = read_data()
