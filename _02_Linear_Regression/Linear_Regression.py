@@ -39,6 +39,7 @@ def lasso_train(x, y):
     return W
 
 def lasso(data):
+    return ridge(data)
     x, y = read_data()
     weight = ridge_train(x, y)
     return data @ weight
