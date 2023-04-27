@@ -9,7 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge_train(x, y):
-    lbda = 0.1
+    lbda = 0.01
     I = np.eye(x.shape[1])
     res = np.dot(x.T,x) + lbda * I
     res_inv = np.linalg.inv(res)
@@ -23,6 +23,7 @@ def ridge(data):
     return data @ weight
     
 def lasso_train(x, y):
+    pass
     n, m = x.shape[1], x.shape[0]
     p_lambda = 2 * n  * 0.01
     w = np.random.rand(n)
@@ -52,7 +53,7 @@ def lasso_train(x, y):
             new_loss_list.append(loss(w))
         w[choice_i] = w_i_new_list[int(np.argmin(new_loss_list))]
         new_loss = loss(w)
-        if old_loss-new_loss<1e-10:
+        if old_loss-new_loss < 1e-5:
             optimize_cnt += 1
         else:
             optimize_cnt= 0
