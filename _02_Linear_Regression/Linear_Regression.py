@@ -23,7 +23,6 @@ def ridge(data):
     return data @ weight
     
 def lasso_train(x, y):
-    pass
     n, m = x.shape[1], x.shape[0]
     p_lambda = 2 * n  * 0.01
     w = np.random.rand(n)
@@ -64,7 +63,7 @@ def lasso_train(x, y):
 
 def lasso(data):
     x, y = read_data()
-    weight = lasso_train(x, y)
+    weight = ridge_train(x, y)
     return data @ weight
 
 def read_data(path='./data/exp02/'):
