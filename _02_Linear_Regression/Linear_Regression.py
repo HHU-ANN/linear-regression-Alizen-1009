@@ -9,7 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge_train(x, y):
-    lbda = 30
+    lbda = 1000
     I = np.eye(x.shape[1])
     res = np.dot(x.T,x) + lbda * I
     res_inv = np.linalg.inv(res)
