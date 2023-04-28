@@ -31,14 +31,17 @@ def lasso_train(x, y):
     n = x.shape[1]
     w = np.ones(n)
     w = w.reshape(-1, 1)
+    print(w.shape)
     max_iterator = 1000
     alpha = 0.1
     lbda = 0.03
-    y = y.reshape(1, -1)
+    y = y.reshape(y.shape[0], 1)
     for i in range(max_iterator):
         gradient = np.dot(x.T,(np.dot(x, w)-y)) / m + lbda * np.sign(w)
+        #print(gradient.shape)
         w = w - alpha * gradient
     return w
+
 
 def lasso(data):
     x, y = read_data()
