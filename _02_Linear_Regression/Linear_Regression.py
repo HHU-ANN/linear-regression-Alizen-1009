@@ -41,7 +41,7 @@ def lasso_train(x, y):
 
 def lasso(data):
     x, y = read_data()
-    weight = ridge_train(x, y)
+    weight = lasso_train(x, y)
     data = np.insert(data, 0, 1)
     return data @ weight + 0.5
 
