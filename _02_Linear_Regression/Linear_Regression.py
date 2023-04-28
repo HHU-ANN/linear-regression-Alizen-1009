@@ -32,8 +32,8 @@ def lasso_train(x, y):
     w = np.zeros(n)
     w = w.reshape(-1, 1)
     #print(np.sign(w))
-    max_iterator = 10000
-    alpha = 1e-9
+    max_iterator = 100000
+    alpha = 1e-10
     lbda = 0.01
     y = y.reshape(y.shape[0], 1)
     #print(y)
