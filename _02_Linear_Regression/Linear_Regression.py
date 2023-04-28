@@ -29,7 +29,7 @@ def lasso_train(x, y):
     m = x.shape[0]
     x = np.concatenate((np.ones((m,1)),x),axis=1)
     n = x.shape[1]
-    w = np.eye(n)
+    w = np.ones(n)
     max_iterator = 1000
     alpha = 0.1
     lbda = 0.03
