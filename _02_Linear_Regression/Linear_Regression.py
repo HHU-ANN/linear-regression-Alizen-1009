@@ -43,7 +43,7 @@ def lasso(data):
     x, y = read_data()
     weight = ridge_train(x, y)
     data = np.insert(data, 0, 1)
-    return data @ weight
+    return data @ weight + 0.5
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
