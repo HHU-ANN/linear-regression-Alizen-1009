@@ -28,14 +28,22 @@ def ridge(data):
 def lasso_train(x, y):
     m = x.shape[0]
     x = np.concatenate((np.ones((m,1)),x),axis=1)
+    tmpn = x.shape[1]
+    for i in range(1, tmpn):
+        for j in range(i + 1, tmpn):
+            if(i == j - 1):
+                tmp = x[:, i] * x[:, j]
+                x = np.column_stack((x, tmp))
+            else:  break
     n = x.shape[1]
     w = np.zeros(n)
     w = w.reshape(-1, 1)
     #print(np.sign(w))
-    max_iterator = 100000
-    alpha = 1e-10
-    lbda = 0.02
+    max_iterator = 1000000
+    alpha = 8e-10
+    lbda = 0.03
     y = y.reshape(y.shape[0], 1)
+    
     #print(y)
     #print(m)
     for i in range(max_iterator):
@@ -49,12 +57,22 @@ def lasso(data):
     x, y = read_data()
     weight = lasso_train(x, y)
     data = np.insert(data, 0, 1)
+    data = data.reshape(data.shape[0], 1)
+    tmpn = data.shape[0]
+    for i in range(1, tmpn):
+        for j in range(i + 1, tmpn):
+            if(i == j - 1):
+                tmp = data[i] * data[j]
+                data = np.append(data, tmp)
+                #print(data.shape)
+            else: break 
+    #a = np.append(data, [data[1] * data[2], data[3] *data[4], data[5] * data[6]])
     data = data.reshape(1, data.shape[0])
-    #print(data) 
-    #print(weight)
+    #print(weight.shape)
+    #print(data.shape)
     ans = np.dot(data, weight)
     #print(ans)
-    return ans[0][0] 
+    return ans[0][0]
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
