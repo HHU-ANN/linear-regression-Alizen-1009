@@ -29,25 +29,32 @@ def lasso_train(x, y):
     m = x.shape[0]
     x = np.concatenate((np.ones((m,1)),x),axis=1)
     n = x.shape[1]
-    w = np.ones(n)
+    w = np.zeros(n)
     w = w.reshape(-1, 1)
-    print(w.shape)
+    #print(np.sign(w))
     max_iterator = 1000
-    alpha = 0.1
-    lbda = 0.03
+    alpha = 1e-9
+    lbda = 0.01
     y = y.reshape(y.shape[0], 1)
+    #print(y)
+    #print(m)
     for i in range(max_iterator):
         gradient = np.dot(x.T,(np.dot(x, w)-y)) / m + lbda * np.sign(w)
-        #print(gradient.shape)
-        w = w - alpha * gradient
+        #print(gradient)
+        w = w - alpha * gradient 
+        #print(w)   
     return w
-
 
 def lasso(data):
     x, y = read_data()
     weight = lasso_train(x, y)
     data = np.insert(data, 0, 1)
-    return data @ weight + 0.5
+    data = data.reshape(1, data.shape[0])
+    #print(data) 
+    #print(weight)
+    ans = np.dot(data, weight)
+    #print(ans)
+    return ans[0][0] 
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
