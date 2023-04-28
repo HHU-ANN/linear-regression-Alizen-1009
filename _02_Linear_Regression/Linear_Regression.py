@@ -15,8 +15,8 @@ def ridge_train(x, y):
     I = np.eye(x.shape[1])
     res = np.dot(x.T,x) + lbda * I
     res_inv = np.linalg.inv(res)
-    ans = np.dot(res_inv, np.dot(x.T, y))
-    return ans
+    w = np.dot(res_inv, np.dot(x.T, y))
+    return w
 
 def ridge(data):
     x, y = read_data()
@@ -25,23 +25,24 @@ def ridge(data):
     return data @ weight + 0.5
 
 
-
 def lasso_train(x, y):
     m = x.shape[0]
+    x = np.concatenate((np.ones((m,1)),x),axis=1)
     n = x.shape[1]
-    W=np.ones((n,1))
-    y.reshape(-1,1)
-    Lambda = 0.1
-    a = 0.01
-    for i in range(10000):
-        gradient = np.dot(x.T,(np.dot(x, W) -y)/m )+ Lambda * np.sign(W)
-        W=W-a* gradient
-    return W
+    w = np.eye(n)
+    max_iterator = 1000
+    alpha = 0.1
+    lbda = 0.03
+    y = y.reshape(1, -1)
+    for i in range(max_iterator):
+        gradient = np.dot(x.T,(np.dot(x, w)-y)) / m + lbda * np.sign(w)
+        w = w - alpha * gradient
+    return w
 
 def lasso(data):
-    return ridge(data)
     x, y = read_data()
     weight = ridge_train(x, y)
+    data = np.insert(data, 0, 1)
     return data @ weight
 
 def read_data(path='./data/exp02/'):
